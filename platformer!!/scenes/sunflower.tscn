@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://riirw3tqmhko"]
+
+[ext_resource type="Script" path="res://scenes/sunflower.gd" id="1_laivt"]
+[ext_resource type="Texture2D" uid="uid://buculrynrhth" path="res://SunflowerMapDesign/sunflower (2).png" id="1_uugfr"]
+[ext_resource type="PackedScene" uid="uid://dhrdqg1gfao43" path="res://scenes/danger_zone.tscn" id="3_8i6fq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_23rj3"]
+radius = 27.0
+height = 64.0
+
+[sub_resource type="Animation" id="Animation_ajien"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_kt1hh"]
+resource_name = "walk right"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j83qf"]
+_data = {
+"walk": SubResource("Animation_ajien"),
+"walk right": SubResource("Animation_kt1hh")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nueuy"]
+radius = 13.913
+height = 34.3188
+
+[node name="sunflower" type="CharacterBody2D"]
+script = ExtResource("1_laivt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(165.75, 163.5)
+scale = Vector2(2.26563, 2.15625)
+texture = ExtResource("1_uugfr")
+hframes = 2
+vframes = 2
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(164, 164)
+shape = SubResource("CapsuleShape2D_23rj3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j83qf")
+}
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(113, 189)
+target_position = Vector2(0, 15)
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(218, 189)
+target_position = Vector2(0, 15)
+
+[node name="RayCast2D3" type="RayCast2D" parent="."]
+position = Vector2(126, 164)
+target_position = Vector2(-21, 0)
+
+[node name="RayCast2D4" type="RayCast2D" parent="."]
+position = Vector2(208, 165)
+target_position = Vector2(23, 0)
+
+[node name="danger zone" parent="." instance=ExtResource("3_8i6fq")]
+position = Vector2(165.75, 163.5)
+scale = Vector2(2.26563, 2.15625)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="danger zone"]
+position = Vector2(-0.772412, 0.231884)
+shape = SubResource("CapsuleShape2D_nueuy")

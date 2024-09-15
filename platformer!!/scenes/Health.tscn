@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://wdneetesdhj0"]
+
+[ext_resource type="Texture2D" uid="uid://cqe67tkm7ps0k" path="res://PlayerSprites/hearts.png" id="1_7i2ii"]
+[ext_resource type="Script" path="res://scenes/Health.gd" id="1_ixs68"]
+
+[sub_resource type="Animation" id="Animation_ksevm"]
+resource_name = "health"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hearts:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_1cina"]
+resource_name = "hit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hearts:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m5ono"]
+_data = {
+"health": SubResource("Animation_ksevm"),
+"hit": SubResource("Animation_1cina")
+}
+
+[node name="Health" type="Node2D"]
+position = Vector2(308, 83)
+script = ExtResource("1_ixs68")
+
+[node name="Hearts" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-266, -40)
+scale = Vector2(1.725, 1.64444)
+texture = ExtResource("1_7i2ii")
+hframes = 2
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Hearts"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_m5ono")
+}
+
+[node name="Hearts2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-214, -40)
+scale = Vector2(1.725, 1.64444)
+texture = ExtResource("1_7i2ii")
+hframes = 2
+vframes = 3
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Hearts2"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_m5ono")
+}
+
+[node name="Hearts3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-163, -40)
+scale = Vector2(1.725, 1.64444)
+texture = ExtResource("1_7i2ii")
+hframes = 2
+vframes = 3
+
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="Hearts3"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_m5ono")
+}

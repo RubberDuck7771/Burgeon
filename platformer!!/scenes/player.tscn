@@ -1,0 +1,212 @@
+[gd_scene load_steps=15 format=3 uid="uid://d3sycybaev1by"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_0maej"]
+[ext_resource type="Texture2D" uid="uid://ch7o43eu4w6l3" path="res://PlayerSprites/dog spritesheet.png" id="2_p0vev"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6kkqa"]
+radius = 28.0
+height = 60.0
+
+[sub_resource type="Animation" id="Animation_fktop"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_uescr"]
+resource_name = "idle left"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_3fmwt"]
+resource_name = "jump left"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+
+[sub_resource type="Animation" id="Animation_7ojpu"]
+resource_name = "jump left death"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [13, 14]
+}
+
+[sub_resource type="Animation" id="Animation_5agjd"]
+resource_name = "jump right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="Animation" id="Animation_0yvu7"]
+resource_name = "jump right death"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [12, 14]
+}
+
+[sub_resource type="Animation" id="Animation_l4q7q"]
+resource_name = "walk left"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_us34w"]
+resource_name = "walk left death"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [10, 14]
+}
+
+[sub_resource type="Animation" id="Animation_lw5b3"]
+resource_name = "walk right"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 6, 5, 7]
+}
+
+[sub_resource type="Animation" id="Animation_bog07"]
+resource_name = "walk right death"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("dog:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 14]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xq052"]
+_data = {
+"idle": SubResource("Animation_fktop"),
+"idle left": SubResource("Animation_uescr"),
+"jump left": SubResource("Animation_3fmwt"),
+"jump left death": SubResource("Animation_7ojpu"),
+"jump right": SubResource("Animation_5agjd"),
+"jump right death": SubResource("Animation_0yvu7"),
+"walk left": SubResource("Animation_l4q7q"),
+"walk left death": SubResource("Animation_us34w"),
+"walk right": SubResource("Animation_lw5b3"),
+"walk right death": SubResource("Animation_bog07")
+}
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(-6, -71)
+script = ExtResource("1_0maej")
+maxHealth = 5
+
+[node name="dog" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(3, 38)
+scale = Vector2(1.5419, 1.48047)
+texture = ExtResource("2_p0vev")
+hframes = 4
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11, 36)
+shape = SubResource("CapsuleShape2D_6kkqa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xq052")
+}

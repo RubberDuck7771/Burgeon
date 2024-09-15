@@ -1,0 +1,259 @@
+[gd_scene load_steps=19 format=3 uid="uid://r7njdcpxxns3"]
+
+[ext_resource type="Script" path="res://scenes/level_1.gd" id="1_5t263"]
+[ext_resource type="PackedScene" uid="uid://d3sycybaev1by" path="res://scenes/player.tscn" id="1_w01wd"]
+[ext_resource type="PackedScene" uid="uid://riirw3tqmhko" path="res://scenes/sunflower.tscn" id="3_o64lw"]
+[ext_resource type="PackedScene" uid="uid://dhrdqg1gfao43" path="res://scenes/danger_zone.tscn" id="3_rqx5b"]
+[ext_resource type="PackedScene" uid="uid://cj553q37kppf1" path="res://scenes/heart_container.tscn" id="5_b3u7n"]
+[ext_resource type="Texture2D" uid="uid://dy5yn5088v3i8" path="res://platform.png" id="6_ws11j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1qoa"]
+size = Vector2(8236, 200)
+
+[sub_resource type="QuadMesh" id="QuadMesh_xcys6"]
+size = Vector2(1000, 100)
+
+[sub_resource type="Animation" id="Animation_0yfl7"]
+resource_name = "wind"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7hlvy"]
+_data = {
+"wind": SubResource("Animation_0yfl7")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8ykj"]
+size = Vector2(159, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbv4l"]
+size = Vector2(474.5, 62)
+
+[sub_resource type="QuadMesh" id="QuadMesh_8a2nf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dambj"]
+size = Vector2(3640, 369.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_kyyyk"]
+size = Vector2(1000, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbom3"]
+size = Vector2(50, 174.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgk0g"]
+size = Vector2(474.211, 61.875)
+
+[sub_resource type="QuadMesh" id="QuadMesh_2ngb5"]
+size = Vector2(1000, 100)
+
+[node name="Level 1" type="Node2D" node_paths=PackedStringArray("level_start_pos")]
+position = Vector2(1978, 336)
+script = ExtResource("1_5t263")
+level_start_pos = NodePath("Node2D (player start)")
+
+[node name="Player" parent="." instance=ExtResource("1_w01wd")]
+position = Vector2(-1934, -377)
+
+[node name="Camera2D2" type="Camera2D" parent="Player"]
+
+[node name="HeartContainer" parent="Player/Camera2D2" instance=ExtResource("5_b3u7n")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -534.0
+offset_top = -296.0
+offset_right = -456.0
+offset_bottom = -256.0
+
+[node name="danger zone" parent="." instance=ExtResource("3_rqx5b")]
+
+[node name="dangerzone" type="CollisionShape2D" parent="danger zone"]
+position = Vector2(1480, 826)
+shape = SubResource("RectangleShape2D_o1qoa")
+
+[node name="sunflower" parent="." instance=ExtResource("3_o64lw")]
+position = Vector2(675, 224)
+
+[node name="sunflower2" parent="." instance=ExtResource("3_o64lw")]
+position = Vector2(-264, -90)
+
+[node name="Node2D (player start)" type="Node2D" parent="."]
+
+[node name="Starter Platform" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Starter Platform"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Starter Platform"]
+texture_filter = 1
+position = Vector2(-1834, -256)
+scale = Vector2(12.7, 9.16406)
+texture = ExtResource("6_ws11j")
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Starter Platform/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Starter Platform"]
+polygon = PackedVector2Array(-2050, -247, -2050, -273, -1960, -311, -1753, -311, -1733, -311, -1698, -302, -1628, -302, -1616, -302, -1568, -278, -1567, -256, -1579, -256, -1580, -247, -1592, -247, -1629, -211, -2053, -213)
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform2"]
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1297, -198)
+scale = Vector2(0.159, 0.36)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+position = Vector2(-1297, -198.25)
+shape = SubResource("RectangleShape2D_r8ykj")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform3"]
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1005, -111)
+scale = Vector2(0.159, 0.36)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+position = Vector2(-1006, -111)
+shape = SubResource("RectangleShape2D_r8ykj")
+
+[node name="Platform4" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform4"]
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-658, -28)
+scale = Vector2(0.159, 0.36)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
+position = Vector2(-655, -28)
+shape = SubResource("RectangleShape2D_r8ykj")
+
+[node name="Platform5" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform5"]
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-166, 138)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform5"]
+position = Vector2(-166.25, 138)
+shape = SubResource("RectangleShape2D_pbv4l")
+
+[node name="Long Platform" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Long Platform"]
+modulate = Color(0.188235, 0.188235, 0.188235, 1)
+position = Vector2(2265.5, 603.375)
+scale = Vector2(3633, 363.25)
+mesh = SubResource("QuadMesh_8a2nf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Long Platform"]
+position = Vector2(2269, 605.25)
+shape = SubResource("RectangleShape2D_dambj")
+
+[node name="Platform6" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform6"]
+modulate = Color(0.848905, 0.848906, 0.848905, 1)
+self_modulate = Color(0.497474, 0.497474, 0.497474, 1)
+z_index = -1
+position = Vector2(479, 339)
+scale = Vector2(0.0600001, 1.82)
+mesh = SubResource("QuadMesh_kyyyk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform6"]
+position = Vector2(483, 335.375)
+shape = SubResource("RectangleShape2D_hbom3")
+
+[node name="Platform7" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform7"]
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(429.875, 344)
+scale = Vector2(0.15625, 0.36)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform7"]
+position = Vector2(430, 344.5)
+shape = SubResource("RectangleShape2D_r8ykj")
+
+[node name="Platform8" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform8"]
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(4594, 422)
+scale = Vector2(0.159, 0.36)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform8"]
+position = Vector2(4590, 424)
+shape = SubResource("RectangleShape2D_r8ykj")
+
+[node name="Platform10" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform10"]
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(4326, 426)
+scale = Vector2(0.159, 0.36)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform10"]
+position = Vector2(4326.5, 426)
+shape = SubResource("RectangleShape2D_r8ykj")
+
+[node name="Platform9" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform9"]
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(4998, 507)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform9"]
+position = Vector2(4998.89, 507.063)
+shape = SubResource("RectangleShape2D_bgk0g")
+
+[node name="Level 2" type="StaticBody2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Level 2"]
+modulate = Color(0.980626, 0.833356, 0.874793, 1)
+self_modulate = Color(0.990079, 0.794984, 0.844519, 1)
+z_index = -1
+position = Vector2(5122, 401.75)
+scale = Vector2(0.11, 1.475)
+mesh = SubResource("QuadMesh_2ngb5")
+
+[node name="Button" type="Button" parent="Level 2"]
+offset_left = 5067.0
+offset_top = 339.75
+offset_right = 5177.0
+offset_bottom = 393.75
+text = "LEVEL 2
+Click to Start"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Level 2/Button" to="." method="_on_button_pressed"]

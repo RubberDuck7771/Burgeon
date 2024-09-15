@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8hbwklo3bvum"]
+
+[ext_resource type="Texture2D" uid="uid://hwhcupkrjoay" path="res://SunflowerMapDesign/moving platform.png" id="2_wsgq6"]
+
+[sub_resource type="GDScript" id="GDScript_ddgmp"]
+script/source = "extends StaticBody2D
+
+func _ready():
+	$Sprite2D2/AnimationPlayer2.play(\"move\")
+"
+
+[sub_resource type="Animation" id="Animation_ofsbe"]
+resource_name = "move"
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 6, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 6, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2237, 127), Vector2(2237, 127), Vector2(2237, -450), Vector2(2237, 127)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dkjbg"]
+_data = {
+"move": SubResource("Animation_ofsbe")
+}
+
+[node name="Moving Platform" type="CharacterBody2D"]
+position = Vector2(2237, 127)
+script = SubResource("GDScript_ddgmp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2237, -233.625)
+scale = Vector2(5.435, 4.415)
+texture = ExtResource("2_wsgq6")
+vframes = 2
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_dkjbg")
+}

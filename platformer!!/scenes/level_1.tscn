@@ -1,0 +1,1111 @@
+[gd_scene load_steps=43 format=3 uid="uid://r7njdcpxxns3"]
+
+[ext_resource type="Script" path="res://scenes/level_1.gd" id="1_5t263"]
+[ext_resource type="PackedScene" uid="uid://d3sycybaev1by" path="res://scenes/player.tscn" id="1_w01wd"]
+[ext_resource type="PackedScene" uid="uid://riirw3tqmhko" path="res://scenes/sunflower.tscn" id="3_o64lw"]
+[ext_resource type="PackedScene" uid="uid://dhrdqg1gfao43" path="res://scenes/danger_zone.tscn" id="3_rqx5b"]
+[ext_resource type="PackedScene" uid="uid://cj553q37kppf1" path="res://scenes/heart_container.tscn" id="5_b3u7n"]
+[ext_resource type="PackedScene" uid="uid://blsvgadiucaej" path="res://scenes/void.tscn" id="5_jaxqu"]
+[ext_resource type="Texture2D" uid="uid://71aavvkfsgwl" path="res://SunflowerMapDesign/acid water.png" id="6_3gsy6"]
+[ext_resource type="Script" path="res://scenes/Starter Platform.gd" id="6_pg2y5"]
+[ext_resource type="Texture2D" uid="uid://dy5yn5088v3i8" path="res://SunflowerMapDesign/platform.png" id="6_ws11j"]
+[ext_resource type="Script" path="res://scenes/River Platform.gd" id="8_kefri"]
+[ext_resource type="Texture2D" uid="uid://bcbliixcvnfhw" path="res://SunflowerMapDesign/simple platforms.png" id="8_ttb1l"]
+[ext_resource type="Texture2D" uid="uid://kt6a0jtgbpcu" path="res://SunflowerMapDesign/river platform.png" id="9_85ru7"]
+[ext_resource type="Texture2D" uid="uid://cmewfpa2go25q" path="res://SunflowerMapDesign/obstacles.png" id="12_hhg70"]
+[ext_resource type="Texture2D" uid="uid://co331cbu34o54" path="res://SunflowerMapDesign/long platform.png" id="12_rh7mc"]
+[ext_resource type="Script" path="res://scenes/Acid.gd" id="15_my3g5"]
+[ext_resource type="Texture2D" uid="uid://hwhcupkrjoay" path="res://SunflowerMapDesign/moving platform.png" id="16_7q1mx"]
+[ext_resource type="Script" path="res://scenes/Moving Platform.gd" id="16_g3c02"]
+[ext_resource type="Script" path="res://scenes/Waterfall.gd" id="18_d8nnw"]
+[ext_resource type="Texture2D" uid="uid://di8e7s62dfmax" path="res://waterfall.png" id="18_sblpf"]
+[ext_resource type="Script" path="res://scenes/Waterfall2.gd" id="20_1sq3r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r42m7"]
+size = Vector2(5427.5, 168)
+
+[sub_resource type="Animation" id="Animation_7nxau"]
+resource_name = "flowing"
+length = 4.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.2, 3.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f8y4t"]
+_data = {
+"flowing": SubResource("Animation_7nxau")
+}
+
+[sub_resource type="QuadMesh" id="QuadMesh_tclnq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_326qu"]
+size = Vector2(0.617157, 1.0641)
+
+[sub_resource type="QuadMesh" id="QuadMesh_xcys6"]
+size = Vector2(1000, 100)
+
+[sub_resource type="Animation" id="Animation_0yfl7"]
+resource_name = "wind"
+length = 4.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7hlvy"]
+_data = {
+"wind": SubResource("Animation_0yfl7")
+}
+
+[sub_resource type="Animation" id="Animation_lw6p4"]
+resource_name = "flowing"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sco87"]
+_data = {
+"flowing": SubResource("Animation_lw6p4")
+}
+
+[sub_resource type="Animation" id="Animation_gygbn"]
+resource_name = "move"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.9, 1, 1.4, 1.5, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 25), Vector2(0, 25), Vector2(0, 55), Vector2(0, 55), Vector2(0, 20), Vector2(0, 20)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jj16y"]
+_data = {
+"move": SubResource("Animation_gygbn")
+}
+
+[sub_resource type="QuadMesh" id="QuadMesh_2ngb5"]
+size = Vector2(1000, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvqmb"]
+size = Vector2(845.75, 416)
+
+[sub_resource type="Animation" id="Animation_21srx"]
+resource_name = "move"
+length = 12.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 6, 8, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -900), Vector2(0, -900), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 6, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_27rm8"]
+_data = {
+"move": SubResource("Animation_21srx")
+}
+
+[sub_resource type="Animation" id="Animation_3wjvk"]
+resource_name = "move"
+length = 15.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 6, 11, 15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-4418, -385), Vector2(-4418, -385), Vector2(-4418, 550), Vector2(-4418, 550), Vector2(-4418, -385)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 6, 11),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tjbqc"]
+_data = {
+"move": SubResource("Animation_3wjvk")
+}
+
+[sub_resource type="Animation" id="Animation_ndknt"]
+resource_name = "glow"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pstpn"]
+_data = {
+"glow": SubResource("Animation_ndknt")
+}
+
+[sub_resource type="Animation" id="Animation_lj84q"]
+resource_name = "flowing"
+length = 2.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjwp3"]
+_data = {
+"flowing": SubResource("Animation_lj84q")
+}
+
+[node name="Level 1" type="Node2D" node_paths=PackedStringArray("level_start_pos")]
+position = Vector2(1978, 336)
+script = ExtResource("1_5t263")
+level_start_pos = NodePath("Node2D (player start)")
+
+[node name="Player" parent="." instance=ExtResource("1_w01wd")]
+position = Vector2(-1836, -381)
+
+[node name="Camera2D2" type="Camera2D" parent="Player"]
+position = Vector2(-9, 33)
+
+[node name="HeartContainer" parent="Player/Camera2D2" instance=ExtResource("5_b3u7n")]
+z_index = 1
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -534.0
+offset_top = -296.0
+offset_right = -456.0
+offset_bottom = -256.0
+
+[node name="sunflower" parent="." instance=ExtResource("3_o64lw")]
+position = Vector2(1643, 222)
+
+[node name="sunflower2" parent="." instance=ExtResource("3_o64lw")]
+position = Vector2(1013, 225)
+
+[node name="sunflower3" parent="." instance=ExtResource("3_o64lw")]
+position = Vector2(2729, -608)
+
+[node name="sunflower4" parent="." instance=ExtResource("3_o64lw")]
+position = Vector2(3579, -608)
+
+[node name="Node2D (player start)" type="Node2D" parent="."]
+
+[node name="void" parent="." instance=ExtResource("5_jaxqu")]
+position = Vector2(0, -85)
+
+[node name="void" type="CollisionShape2D" parent="void"]
+position = Vector2(3170.75, 958)
+shape = SubResource("RectangleShape2D_r42m7")
+
+[node name="Sprite2D" type="Sprite2D" parent="void"]
+texture_filter = 1
+position = Vector2(3172.75, 1068)
+scale = Vector2(54.215, 8.875)
+texture = ExtResource("6_3gsy6")
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="void/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_f8y4t")
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="void"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="void/StaticBody2D"]
+visible = false
+position = Vector2(1566, 1044)
+scale = Vector2(8782, 214.5)
+mesh = SubResource("QuadMesh_tclnq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="void/StaticBody2D"]
+position = Vector2(3183.94, 1008)
+scale = Vector2(8782, 214.5)
+shape = SubResource("RectangleShape2D_326qu")
+
+[node name="void2" parent="." instance=ExtResource("5_jaxqu")]
+position = Vector2(-3834, -740)
+scale = Vector2(0.746668, 1.62051)
+
+[node name="void" type="CollisionShape2D" parent="void2"]
+position = Vector2(3170.75, 958)
+shape = SubResource("RectangleShape2D_r42m7")
+
+[node name="Sprite2D" type="Sprite2D" parent="void2"]
+texture_filter = 1
+position = Vector2(3172.75, 1068)
+scale = Vector2(54.215, 8.875)
+texture = ExtResource("6_3gsy6")
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="void2/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_f8y4t")
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="void2"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="void2/StaticBody2D"]
+visible = false
+position = Vector2(1566, 1044)
+scale = Vector2(8782, 214.5)
+mesh = SubResource("QuadMesh_tclnq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="void2/StaticBody2D"]
+position = Vector2(3183.94, 1008)
+scale = Vector2(8782, 214.5)
+shape = SubResource("RectangleShape2D_326qu")
+
+[node name="Starter Platform" type="StaticBody2D" parent="."]
+script = ExtResource("6_pg2y5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Starter Platform"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Starter Platform"]
+texture_filter = 1
+position = Vector2(-1834, -256)
+scale = Vector2(12.7, 9.16406)
+texture = ExtResource("6_ws11j")
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Starter Platform/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Starter Platform"]
+polygon = PackedVector2Array(-2050, -247, -2050, -283, -1985, -283, -1959, -299, -1938, -311, -1753, -311, -1733, -311, -1698, -302, -1686, -295, -1667, -283, -1649, -283, -1631, -283, -1568, -283, -1567, -256, -1579, -256, -1580, -247, -1592, -247, -1629, -211, -2053, -213)
+
+[node name="Starter Platform2" type="StaticBody2D" parent="."]
+position = Vector2(-894, -5)
+script = ExtResource("6_pg2y5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Starter Platform2"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Starter Platform2"]
+texture_filter = 1
+position = Vector2(-2057, -204)
+scale = Vector2(26.37, 18.1758)
+texture = ExtResource("6_ws11j")
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Starter Platform2/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Starter Platform2"]
+position = Vector2(1844.68, 320)
+scale = Vector2(2.13881, 2.025)
+polygon = PackedVector2Array(-2050, -247, -2050, -283, -2013.12, -293.333, -2004.7, -311.111, -1938, -311, -1753, -311, -1733, -311, -1698, -302, -1686, -295, -1667, -283, -1649, -283, -1631, -283, -1568, -283, -1567, -256, -1579, -256, -1580, -247, -1592, -247, -1629, -211, -2053, -213)
+
+[node name="Small Platform" type="StaticBody2D" parent="."]
+script = ExtResource("6_pg2y5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Small Platform"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Small Platform"]
+texture_filter = 1
+position = Vector2(-1357, -163)
+scale = Vector2(4.7425, 4.08301)
+texture = ExtResource("6_ws11j")
+flip_h = true
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Small Platform/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Small Platform"]
+polygon = PackedVector2Array(-1457, -162, -1457, -179, -1399, -187, -1361, -187, -1335, -184, -1277, -184, -1276, -159, -1302, -137, -1432, -143)
+
+[node name="Small Platform2" type="StaticBody2D" parent="."]
+script = ExtResource("6_pg2y5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Small Platform2"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Small Platform2"]
+texture_filter = 1
+position = Vector2(-1011, -108)
+scale = Vector2(4.7425, 4.08301)
+texture = ExtResource("6_ws11j")
+flip_h = true
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Small Platform2/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Small Platform2"]
+position = Vector2(346, 54)
+polygon = PackedVector2Array(-1457, -162, -1457, -177, -1399, -187, -1366, -186, -1337, -182, -1276, -182, -1276, -158, -1302, -137, -1432, -143)
+
+[node name="Small Platform7" type="StaticBody2D" parent="."]
+position = Vector2(5459, -89)
+script = ExtResource("6_pg2y5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Small Platform7"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Small Platform7"]
+texture_filter = 1
+position = Vector2(-1011, -108)
+scale = Vector2(4.7425, 4.08301)
+texture = ExtResource("6_ws11j")
+flip_h = true
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Small Platform7/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Small Platform7"]
+position = Vector2(346, 54)
+polygon = PackedVector2Array(-1457, -162, -1457, -177, -1399, -187, -1366, -186, -1337, -182, -1276, -182, -1276, -158, -1302, -137, -1432, -143)
+
+[node name="Small Platform3" type="StaticBody2D" parent="."]
+position = Vector2(4728, -524)
+rotation = -0.00335197
+script = ExtResource("6_pg2y5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Small Platform3"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Small Platform3"]
+texture_filter = 1
+position = Vector2(-1011, -108)
+scale = Vector2(4.7425, 4.08301)
+texture = ExtResource("6_ws11j")
+flip_h = true
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Small Platform3/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Small Platform3"]
+position = Vector2(346, 54)
+polygon = PackedVector2Array(-1457, -162, -1457, -177, -1399, -187, -1366, -186, -1358.66, -186.021, -1337, -182, -1276, -182, -1276, -158, -1302, -137, -1432, -143)
+
+[node name="Small Platform5" type="StaticBody2D" parent="."]
+z_index = 1
+position = Vector2(3941, -553)
+script = ExtResource("6_pg2y5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Small Platform5"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Small Platform5"]
+texture_filter = 1
+position = Vector2(-1011, -108)
+scale = Vector2(4.7425, 4.08301)
+texture = ExtResource("6_ws11j")
+flip_h = true
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Small Platform5/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Small Platform5"]
+position = Vector2(346, 54)
+polygon = PackedVector2Array(-1457, -162, -1457, -177, -1399, -187, -1366, -186, -1329, -186, -1305, -186, -1277, -186, -1276, -158, -1302, -137, -1432, -143)
+
+[node name="Small Platform6" type="StaticBody2D" parent="."]
+z_index = 1
+position = Vector2(3827, -554)
+script = ExtResource("6_pg2y5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Small Platform6"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Small Platform6"]
+texture_filter = 1
+position = Vector2(-1011, -108)
+scale = Vector2(4.7425, 4.08301)
+texture = ExtResource("6_ws11j")
+flip_h = true
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Small Platform6/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Small Platform6"]
+position = Vector2(346, 54)
+polygon = PackedVector2Array(-1457, -162, -1457, -177, -1399, -187, -1366, -186, -1329, -186, -1305, -186, -1277, -186, -1276, -158, -1302, -137, -1432, -143)
+
+[node name="Small Platform4" type="StaticBody2D" parent="."]
+position = Vector2(4722, -508)
+rotation = 0.0253098
+scale = Vector2(0.917661, 0.967787)
+script = ExtResource("6_pg2y5")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Small Platform4"]
+visible = false
+modulate = Color(0.188372, 0.188371, 0.188371, 1)
+position = Vector2(-1815, -272.5)
+scale = Vector2(0.478, 0.63)
+mesh = SubResource("QuadMesh_xcys6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Small Platform4"]
+texture_filter = 1
+position = Vector2(-934.744, -108)
+scale = Vector2(7.79275, 4.08301)
+texture = ExtResource("6_ws11j")
+flip_h = true
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Small Platform4/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7hlvy")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Small Platform4"]
+position = Vector2(1285.97, 52.6975)
+scale = Vector2(1.63685, 1)
+polygon = PackedVector2Array(-1457, -162, -1458.15, -168.913, -1448.9, -173.411, -1440.3, -176.849, -1417.08, -181.896, -1403.8, -184.485, -1399, -187, -1366, -186, -1335.26, -184.976, -1305.18, -184.672, -1276, -182, -1276, -158, -1302, -137, -1432, -143)
+
+[node name="Simple Platform" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Simple Platform"]
+texture_filter = 1
+position = Vector2(-640.75, -4.12502)
+scale = Vector2(5.15, 3.485)
+texture = ExtResource("8_ttb1l")
+hframes = 2
+vframes = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Simple Platform"]
+polygon = PackedVector2Array(-739, -11, -739, -18, -730, -22, -618, -22, -597, -22, -537, -22, -537, -11, -543, -11, -590, 30, -685, 20)
+
+[node name="River Platform" type="StaticBody2D" parent="."]
+script = ExtResource("8_kefri")
+
+[node name="River Platform" type="Sprite2D" parent="River Platform"]
+texture_filter = 1
+position = Vector2(-68.9999, 231)
+scale = Vector2(14.16, 13.12)
+texture = ExtResource("9_85ru7")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="River Platform/River Platform"]
+libraries = {
+"": SubResource("AnimationLibrary_sco87")
+}
+
+[node name="danger zone" parent="River Platform" instance=ExtResource("3_rqx5b")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="River Platform/danger zone"]
+position = Vector2(37, -67)
+polygon = PackedVector2Array(-148, 220, -93, 219, -91, 232, -62, 235, -61, 272, -48, 274, -49, 418, -49, 581, -147, 581)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="River Platform"]
+position = Vector2(35, -70)
+polygon = PackedVector2Array(-388, 244, -388, 222, -332, 196, -287, 203, -232, 222, -203, 222, -179, 222, -147, 223, -146, 258, -63, 259, -63, 234, -3, 209, 13, 209, 40, 222, 61, 222, 108, 222, 108, 274, 94, 273, 94, 288, 69, 290, -329, 288)
+
+[node name="River Platform2" type="StaticBody2D" parent="."]
+position = Vector2(1530, -702)
+scale = Vector2(0.74925, 1.31895)
+script = ExtResource("8_kefri")
+
+[node name="River Platform" type="Sprite2D" parent="River Platform2"]
+texture_filter = 1
+position = Vector2(-68.9999, 231)
+scale = Vector2(14.16, 13.12)
+texture = ExtResource("9_85ru7")
+flip_h = true
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="River Platform2/River Platform"]
+libraries = {
+"": SubResource("AnimationLibrary_sco87")
+}
+
+[node name="danger zone" parent="River Platform2" instance=ExtResource("3_rqx5b")]
+position = Vector2(0, 13.471)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="River Platform2/danger zone"]
+position = Vector2(24.024, -18.0201)
+polygon = PackedVector2Array(-144.144, 233.52, -108.108, 229.729, -105.439, 219.872, -70.7375, 219.114, -52.0522, 219.114, -38.7056, 265.363, -38.7056, 282.043, -49, 418, -52.0518, 521.629, -142.81, 520.112)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="River Platform2/danger zone/CollisionPolygon2D"]
+libraries = {
+"": SubResource("AnimationLibrary_jj16y")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="River Platform2"]
+position = Vector2(102.77, -57.6218)
+polygon = PackedVector2Array(-388, 244, -388, 222, -332, 196, -284.285, 201.676, -256.256, 210.016, -241.575, 215.323, -226.894, 222.905, -213.547, 222.905, -213.547, 259.298, -113.447, 257.782, -114.781, 224.422, -126.793, 222.905, -129.463, 210.016, -88.0881, 210.016, -66.7334, 206.225, -38.7056, 200.16, -36.0361, 191.062, 5.33838, 188.029, 24.0239, 190.303, 32.0317, 195.611, 45.3784, 210.016, 110.777, 210.016, 112.112, 235.794, 108, 274, 94, 273, 94, 288, 69, 290, 26.6934, 326.018, -9.34253, 367.718, -22.6895, 431.405, -57.3906, 388.189, -100.1, 326.776, -254.922, 326.776, -270.938, 363.927, -298.966, 378.332, -329, 288)
+
+[node name="Long Platform" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Long Platform"]
+texture_filter = 1
+position = Vector2(2313, 438)
+scale = Vector2(36.2, 19.81)
+texture = ExtResource("12_rh7mc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Long Platform"]
+polygon = PackedVector2Array(448, 518, 448, 418, 2232, 419, 2371, 441, 2635, 654, 3042, 681, 3044, 421, 4141, 418, 4142, 518, 4104, 518, 4104, 615, 4178, 616, 4178, 676, 4214, 676, 4214, 697, 4178, 696, 4178, 716, 4104, 716, 4105, 913, 3996, 913, 3996, 893, 3960, 893, 3960, 854, 3923, 854, 3923, 814, 3888, 814, 3889, 795, 3852, 795, 3852, 815, 3490, 815, 3490, 834, 3454, 834, 3454, 853, 3417, 854, 3418, 894, 3236, 893, 3236, 874, 3200, 874, 3201, 834, 2983, 835, 2982, 814, 2947, 815, 2948, 834, 2910, 834, 2910, 854, 2692, 853, 2693, 814, 2620, 815, 2621, 794, 2549, 796, 2547, 775, 2079, 779, 2082, 818, 2001, 818, 1824, 890, 1689, 893, 1509, 800, 1357, 797, 1213, 872, 952, 875, 664, 932, 595, 935, 560, 893, 527, 857, 488, 839, 485, 740, 447, 736, 450, 656, 485, 656, 487, 517)
+
+[node name="Long Platform2" type="StaticBody2D" parent="."]
+position = Vector2(2655, -603)
+scale = Vector2(0.1829, 0.460019)
+
+[node name="Sprite2D" type="Sprite2D" parent="Long Platform2"]
+texture_filter = 1
+position = Vector2(3849.1, 434.765)
+scale = Vector2(56.6823, 19.81)
+texture = ExtResource("12_rh7mc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Long Platform2"]
+scale = Vector2(1.62823, 1)
+polygon = PackedVector2Array(448, 518, 448, 418, 2232, 419, 2394.21, 419.548, 2672.91, 419.548, 2928.12, 419.548, 3042.29, 419.548, 4141, 418, 4142, 518, 4104, 518, 4104, 615, 4178, 616, 4178, 676, 4214, 676, 4214, 697, 4178, 696, 4178, 716, 4104, 716, 4105, 913, 3996, 913, 3996, 893, 3960, 893, 3960, 854, 3923, 854, 3923, 814, 3888, 814, 3889, 795, 3852, 795, 3852, 815, 3490, 815, 3490, 834, 3454, 834, 3454, 853, 3417, 854, 3418, 894, 3236, 893, 3236, 874, 3200, 874, 3201, 834, 2983, 835, 2982, 814, 2947, 815, 2948, 834, 2910, 834, 2910, 854, 2692, 853, 2693, 814, 2620, 815, 2621, 794, 2549, 796, 2547, 775, 2079, 779, 2082, 818, 2001, 818, 1824, 890, 1689, 893, 1509, 800, 1357, 797, 1213, 872, 952, 875, 664, 932, 595, 935, 560, 893, 527, 857, 488, 839, 485, 740, 447, 736, 450, 656, 485, 656, 487, 517)
+
+[node name="Wall Platform" type="StaticBody2D" parent="."]
+position = Vector2(-57, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall Platform"]
+texture_filter = 1
+position = Vector2(556, 156)
+scale = Vector2(8.2, 11.0625)
+texture = ExtResource("12_hhg70")
+hframes = 3
+vframes = 3
+frame = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall Platform"]
+position = Vector2(1, -1)
+polygon = PackedVector2Array(523, 420, 522, 400, 532, 396, 533, 388, 540, 386, 538, 366, 516, 332, 517, 299, 474, 299, 462, 278, 432, 278, 431, 267, 530, 268, 530, 257, 530, 250, 532, 236, 532, 224, 531, 187, 604, 179, 604, 190, 596, 190, 596, 201, 588, 201, 588, 212, 596, 212, 596, 400, 604, 400, 604, 423)
+
+[node name="Level 2 Portal" type="StaticBody2D" parent="."]
+position = Vector2(-1531, -57)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Level 2 Portal"]
+modulate = Color(0.980626, 0.833356, 0.874793, 1)
+self_modulate = Color(0.990079, 0.794984, 0.844519, 1)
+z_index = -1
+position = Vector2(5122, 401.75)
+scale = Vector2(0.11, 1.475)
+mesh = SubResource("QuadMesh_2ngb5")
+
+[node name="Button" type="Button" parent="Level 2 Portal"]
+offset_left = 5067.0
+offset_top = 339.75
+offset_right = 5177.0
+offset_bottom = 393.75
+text = "LEVEL 2
+Click to Start"
+metadata/_edit_use_anchors_ = true
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+z_index = -1
+texture_filter = 1
+position = Vector2(1360, 181)
+scale = Vector2(9.25333, 9.99306)
+texture = ExtResource("12_hhg70")
+hframes = 3
+vframes = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall"]
+polygon = PackedVector2Array(1351, 161, 1415, 161, 1415, 180, 1415, 228, 1414, 263, 1334, 265, 1333, 260, 1333, 252, 1332, 241, 1323, 240, 1323, 221, 1332, 221, 1332, 191, 1342, 191, 1342, 181, 1351, 181)
+
+[node name="Wall2" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
+z_index = -1
+texture_filter = 1
+position = Vector2(1663, 155.917)
+scale = Vector2(9.25333, 11.0382)
+texture = ExtResource("12_hhg70")
+flip_h = true
+hframes = 3
+vframes = 3
+frame = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall2"]
+polygon = PackedVector2Array(1607, 134, 1671, 134, 1677, 134, 1686, 134, 1691, 134, 1691, 167, 1691, 200, 1700, 200, 1700, 222, 1691, 222, 1692, 234, 1617, 234, 1617, 222, 1625, 222, 1625, 201, 1617, 201, 1617, 190, 1608, 189, 1608, 167, 1616, 167, 1616, 156, 1607, 156)
+
+[node name="Wall4" type="StaticBody2D" parent="."]
+position = Vector2(1593, -772)
+scale = Vector2(0.963743, 0.853686)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall4"]
+z_index = -1
+texture_filter = 1
+position = Vector2(1621.8, 265.906)
+scale = Vector2(5.77418, 7.01029)
+texture = ExtResource("12_hhg70")
+flip_h = true
+hframes = 3
+vframes = 3
+frame = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall4"]
+position = Vector2(529.187, 163.995)
+scale = Vector2(0.656556, 0.656399)
+polygon = PackedVector2Array(1607, 134, 1671, 134, 1677, 134, 1686, 134, 1691, 134, 1691.03, 144.55, 1615.17, 144.55, 1607.27, 144.55)
+
+[node name="Wall3" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall3"]
+z_index = -1
+texture_filter = 1
+position = Vector2(1965, 157)
+scale = Vector2(9.25333, 11.0382)
+texture = ExtResource("12_hhg70")
+flip_h = true
+hframes = 3
+vframes = 3
+frame = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall3"]
+position = Vector2(274, -31)
+polygon = PackedVector2Array(1607, 134, 1755, 134, 1756, 146, 1729, 164, 1701, 167, 1697, 185, 1708, 187, 1716, 197, 1718, 229, 1726, 232, 1693, 232, 1615, 231, 1617, 222, 1619, 217, 1619, 211, 1617, 201, 1617, 190, 1608, 189, 1608, 167, 1616, 167, 1616, 156, 1607, 156)
+
+[node name="Wall5" type="StaticBody2D" parent="."]
+position = Vector2(1381, -805)
+scale = Vector2(0.994328, 0.90522)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall5"]
+z_index = -1
+texture_filter = 1
+position = Vector2(2111.98, 264.024)
+scale = Vector2(5.07209, 7.1222)
+texture = ExtResource("12_hhg70")
+flip_h = true
+hframes = 3
+vframes = 3
+frame = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall5"]
+position = Vector2(1208.86, 124.831)
+scale = Vector2(0.533908, 0.772338)
+polygon = PackedVector2Array(1607, 134, 1759.34, 134.452, 1759.34, 147.325, 1616, 156, 1607, 156)
+
+[node name="Wall6" type="StaticBody2D" parent="."]
+position = Vector2(1457, -806)
+scale = Vector2(0.994328, 0.90522)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall6"]
+z_index = -1
+texture_filter = 1
+position = Vector2(1937.99, 254.082)
+scale = Vector2(5.81464, 7.59175)
+texture = ExtResource("12_hhg70")
+hframes = 3
+vframes = 3
+frame = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall6"]
+position = Vector2(1039.9, 112.68)
+scale = Vector2(0.533908, 0.772338)
+polygon = PackedVector2Array(1607, 134, 1705.76, 134.293, 1780.06, 134.452, 1780.06, 151.616, 1606.77, 148.755)
+
+[node name="Stub" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Stub"]
+texture_filter = 1
+position = Vector2(1009, 278)
+scale = Vector2(4.50833, 5.98654)
+texture = ExtResource("12_hhg70")
+flip_h = true
+hframes = 3
+vframes = 3
+frame = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stub"]
+position = Vector2(8, 13)
+polygon = PackedVector2Array(956, 361, 956, 409, 1059, 409, 1059, 367, 1033, 367, 1019, 367, 1019, 361, 996, 361, 980, 361, 972, 361)
+
+[node name="Stub2" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Stub2"]
+texture_filter = 1
+position = Vector2(2187, 279)
+scale = Vector2(4.50833, 5.98654)
+texture = ExtResource("12_hhg70")
+flip_h = true
+hframes = 3
+vframes = 3
+frame = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stub2"]
+position = Vector2(1186, 12)
+polygon = PackedVector2Array(956, 361, 956, 409, 1059, 409, 1059, 367, 1033, 367, 1019, 367, 1019, 361, 996, 361, 980, 361, 972, 361)
+
+[node name="Stub3" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Stub3"]
+texture_filter = 1
+position = Vector2(2281, 266)
+scale = Vector2(4.50833, 7.07661)
+texture = ExtResource("12_hhg70")
+hframes = 3
+vframes = 3
+frame = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Stub3"]
+position = Vector2(1268, 12)
+polygon = PackedVector2Array(956, 374, 956, 409, 1059, 409, 1059, 367, 1033, 367, 1019, 367, 1013, 367, 996, 367, 996, 374, 983, 374)
+
+[node name="Simple Platform 3" type="StaticBody2D" parent="."]
+position = Vector2(5, 29)
+
+[node name="Sprite2D" type="Sprite2D" parent="Simple Platform 3"]
+texture_filter = 1
+position = Vector2(802, 296)
+scale = Vector2(4.41334, 3.00826)
+texture = ExtResource("8_ttb1l")
+hframes = 2
+vframes = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Simple Platform 3"]
+polygon = PackedVector2Array(718, 281, 886, 281, 890, 281, 890, 290, 886, 290, 882, 299, 860, 308, 847, 325, 808, 327, 762, 315, 745, 302)
+
+[node name="Simple Platform 6" type="StaticBody2D" parent="."]
+position = Vector2(3316, -646)
+
+[node name="Sprite2D" type="Sprite2D" parent="Simple Platform 6"]
+texture_filter = 1
+position = Vector2(802, 296)
+scale = Vector2(4.41334, 3.00826)
+texture = ExtResource("8_ttb1l")
+hframes = 2
+vframes = 3
+frame = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Simple Platform 6"]
+polygon = PackedVector2Array(718, 281, 886, 281, 890, 281, 890, 290, 886, 290, 882, 299, 860, 308, 847, 325, 808, 327, 762, 315, 745, 302)
+
+[node name="Simple Platform 7" type="StaticBody2D" parent="."]
+position = Vector2(3508, -272)
+
+[node name="Sprite2D" type="Sprite2D" parent="Simple Platform 7"]
+texture_filter = 1
+position = Vector2(802, 296)
+scale = Vector2(4.41334, 3.00826)
+texture = ExtResource("8_ttb1l")
+flip_h = true
+hframes = 2
+vframes = 3
+frame = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Simple Platform 7"]
+polygon = PackedVector2Array(718, 281, 886, 281, 890, 281, 890, 290, 886, 290, 882, 299, 860, 308, 847, 325, 808, 327, 762, 315, 745, 302)
+
+[node name="Simple Platform 8" type="StaticBody2D" parent="."]
+position = Vector2(5027, -77)
+scale = Vector2(-1.05982, 1.00543)
+
+[node name="Sprite2D" type="Sprite2D" parent="Simple Platform 8"]
+texture_filter = 1
+position = Vector2(802, 296)
+scale = Vector2(4.41334, 3.00826)
+texture = ExtResource("8_ttb1l")
+flip_h = true
+hframes = 2
+vframes = 3
+frame = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Simple Platform 8"]
+polygon = PackedVector2Array(716.161, 281.471, 886, 281, 890, 281, 890, 290, 886, 290, 882, 299, 860, 308, 847, 325, 808, 327, 758.621, 324.239, 735.975, 310.315, 712.386, 289.428)
+
+[node name="Simple Platform 4" type="StaticBody2D" parent="."]
+position = Vector2(3, -5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Simple Platform 4"]
+texture_filter = 1
+position = Vector2(1137.17, 239)
+scale = Vector2(5.11333, 3.54413)
+texture = ExtResource("8_ttb1l")
+flip_h = true
+hframes = 2
+vframes = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Simple Platform 4"]
+polygon = PackedVector2Array(1035, 232, 1035, 221, 1229, 221, 1234, 221, 1234, 232, 1150, 271, 1122, 274, 1086, 274, 1059, 249)
+
+[node name="Acid Pond" type="StaticBody2D" parent="."]
+script = ExtResource("15_my3g5")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Acid Pond"]
+texture_filter = 1
+position = Vector2(2634, 629)
+scale = Vector2(8.47389, 9.72188)
+texture = ExtResource("6_3gsy6")
+hframes = 2
+vframes = 3
+frame = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Acid Pond/Sprite2D2"]
+libraries = {
+"": SubResource("AnimationLibrary_f8y4t")
+}
+
+[node name="danger zone" parent="Acid Pond" instance=ExtResource("3_rqx5b")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Acid Pond/danger zone"]
+position = Vector2(2635, 626)
+shape = SubResource("RectangleShape2D_yvqmb")
+
+[node name="Moving Platform" type="AnimatableBody2D" parent="."]
+script = ExtResource("16_g3c02")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving Platform"]
+texture_filter = 1
+position = Vector2(2193, 118)
+scale = Vector2(4, 3)
+texture = ExtResource("16_7q1mx")
+vframes = 2
+frame = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Moving Platform"]
+polygon = PackedVector2Array(2117, 112, 2117, 103, 2273, 103, 2273, 112, 2233, 148, 2197, 148, 2159, 140)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Moving Platform"]
+libraries = {
+"": SubResource("AnimationLibrary_27rm8")
+}
+
+[node name="Moving Platform2" type="AnimatableBody2D" parent="."]
+position = Vector2(-4418, 550)
+script = ExtResource("16_g3c02")
+
+[node name="Sprite2D" type="Sprite2D" parent="Moving Platform2"]
+texture_filter = 1
+position = Vector2(2193, 118)
+scale = Vector2(4, 3)
+texture = ExtResource("16_7q1mx")
+vframes = 2
+frame = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Moving Platform2"]
+polygon = PackedVector2Array(2117, 112, 2117, 103, 2273, 103, 2273, 112, 2233, 148, 2197, 148, 2159, 140)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Moving Platform2"]
+libraries = {
+"": SubResource("AnimationLibrary_tjbqc")
+}
+
+[node name="Simple Platform 5" type="StaticBody2D" parent="."]
+position = Vector2(1383, -1017)
+
+[node name="Sprite2D" type="Sprite2D" parent="Simple Platform 5"]
+texture_filter = 1
+position = Vector2(1160, 239)
+scale = Vector2(6.24663, 4.61603)
+texture = ExtResource("8_ttb1l")
+flip_h = true
+hframes = 2
+vframes = 3
+frame = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Simple Platform 5"]
+position = Vector2(-1, -5)
+polygon = PackedVector2Array(1035, 232, 1035, 221, 1229, 221, 1280, 221, 1280, 235, 1223, 273, 1177, 289, 1101, 288, 1086, 274, 1059, 249)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Simple Platform 5"]
+libraries = {
+"": SubResource("AnimationLibrary_pstpn")
+}
+
+[node name="Waterfall" type="StaticBody2D" parent="."]
+texture_filter = 1
+position = Vector2(1457, -806)
+scale = Vector2(0.994328, 0.90522)
+script = ExtResource("18_d8nnw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Waterfall"]
+position = Vector2(2470.01, 637.414)
+scale = Vector2(13.3529, 25.1918)
+texture = ExtResource("18_sblpf")
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Waterfall"]
+libraries = {
+"": SubResource("AnimationLibrary_mjwp3")
+}
+
+[node name="danger zone" parent="Waterfall" instance=ExtResource("3_rqx5b")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Waterfall/danger zone"]
+polygon = PackedVector2Array(2448.89, 484.965, 2481.07, 484.965, 2506.21, 512.583, 2522.31, 628.576, 2522.31, 1061.62, 2435.82, 1060.52, 2426.76, 929.056, 2426.76, 645.147)
+
+[node name="Waterfall2" type="StaticBody2D" parent="."]
+texture_filter = 1
+position = Vector2(71, -795)
+scale = Vector2(1.08879, 0.880288)
+script = ExtResource("20_1sq3r")
+
+[node name="Sprite2D" type="Sprite2D" parent="Waterfall2"]
+z_index = -1
+position = Vector2(2462.36, 800.306)
+scale = Vector2(15.7568, 48.9612)
+texture = ExtResource("18_sblpf")
+flip_h = true
+hframes = 2
+vframes = 2
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Waterfall2"]
+libraries = {
+"": SubResource("AnimationLibrary_mjwp3")
+}
+
+[node name="danger zone" parent="Waterfall2" instance=ExtResource("3_rqx5b")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Waterfall2/danger zone"]
+position = Vector2(-0.000732422, -169.076)
+scale = Vector2(1, 1.54196)
+polygon = PackedVector2Array(2416.44, 470.641, 2448.58, 438.962, 2510.12, 437.489, 2522.31, 628.576, 2524.81, 994.447, 2415.52, 992.974, 2418.27, 934.036, 2413.68, 651.874)
+
+[connection signal="pressed" from="Level 2 Portal/Button" to="." method="_on_button_pressed"]

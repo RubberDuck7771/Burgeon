@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch326lcd2e3l2"]
+
+[ext_resource type="Script" path="res://scenes/controls.gd" id="1_5cipo"]
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5cipo")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 244.0
+offset_right = 488.0
+offset_bottom = 434.0
+text = "Left Arrow Key (<) --> move left
+Right Arrow Key (>) --> move right
+Spacebar --> jump
+Shift --> interact
+
+Jump and fall onto enemies to kill them!"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 288.0
+offset_right = 960.0
+offset_bottom = 380.0
+text = "Back to Main Menu"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
